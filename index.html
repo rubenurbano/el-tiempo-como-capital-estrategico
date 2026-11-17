@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>El Tiempo como Capital Estratégico — by Rubén Sbarsky</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        dark: {
+                            950: '#060913',
+                            900: '#0b1120',
+                            800: '#141d33',
+                            700: '#1e293b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Optimización de rendimiento y fluidez para Samsung Galaxy A02s (720x1600) */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #060913;
+            color: #f1f5f9;
+            overflow-x: hidden;
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+        }
+
+        /* Ocultar barra de scroll horizontal manteniendo funcionalidad táctil */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Animación suave de entrada de pestañas */
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilo de pestaña activa en barra superior */
+        .top-tab-btn.active {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #060913;
+            font-weight: 700;
+            box-shadow: 0 4px 15px -2px rgba(245, 158, 11, 0.45);
+            border-color: #fbbf24;
+        }
+
+        /* Botones flotantes arrastrables */
+        .floating-draggable {
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            will-change: left, top;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .floating-draggable:active {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.7);
+        }
+
+        /* Tarjetas de agencia digital */
+        .agency-card {
+            background: linear-gradient(180deg, rgba(20, 29, 51, 0.85) 0%, rgba(11, 17, 32, 0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        .quote-box {
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.14) 0%, rgba(245, 158, 11, 0.03) 100%);
+            border-left: 4px solid #f59e0b;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-amber-500 selection:text-slate-950">
+
+    <!-- HEADER FIJO + BARRA DE PESTAÑAS HORIZONTAL PERMANENTE -->
+    <header class="sticky top-0 z-40 bg-dark-950/95 backdrop-blur-md border-b border-slate-800/80 shadow-xl">
+        <!-- Fila Superior: Botón ÍNDICE Sándwich + Marca con Logo + Indicador -->
+        <div class="max-w-4xl mx-auto px-3 py-2 flex items-center justify-between gap-2">
+            <button id="open-drawer-btn" onclick="toggleDrawer(true)" aria-label="Abrir Índice"
+                class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-400 hover:bg-amber-500 hover:text-slate-950 font-display font-bold text-xs tracking-wider uppercase transition-all active:scale-95 shadow-sm shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                <span>ÍNDICE</span>
+            </button>
+
+            <div class="flex items-center justify-center gap-2.5 overflow-hidden">
+                <!-- Logo IA TUTORIALES en pequeño en el Header -->
+                <div class="w-10 h-10 rounded-xl bg-[#040b1e] border border-cyan-400/50 p-0.5 flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(34,211,238,0.35)]">
+                    <svg viewBox="0 0 120 135" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="shieldGradHeader" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#22d3ee"/>
+                                <stop offset="60%" stop-color="#38bdf8"/>
+                                <stop offset="100%" stop-color="#a855f7"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Escudo -->
+                        <path d="M60 8 C32 8 18 18 18 22 C18 62 32 86 60 98 C88 86 102 62 102 22 C102 18 88 8 60 8 Z" stroke="url(#shieldGradHeader)" stroke-width="4.5" fill="#06122e"/>
+                        <!-- Mitad Izquierda: Cerebro Orgánico -->
+                        <path d="M56 24 C44 22 36 30 37 40 C31 43 30 53 36 58 C32 65 37 75 46 76 C51 77 56 74 56 68" stroke="#22d3ee" stroke-width="3.5" stroke-linecap="round"/>
+                        <path d="M46 36 C42 40 44 46 50 47 M42 54 C46 57 50 55 53 52 M45 66 C48 64 52 65 55 62" stroke="#22d3ee" stroke-width="2.8" stroke-linecap="round"/>
+                        <!-- Mitad Derecha: Circuito IA -->
+                        <path d="M64 25 H74 L80 31 M64 38 H78 L85 45 M64 62 H77 L83 56 M64 73 H73 L79 67" stroke="#c084fc" stroke-width="2.8" stroke-linecap="round"/>
+                        <circle cx="80" cy="31" r="3" fill="#22d3ee"/>
+                        <circle cx="85" cy="45" r="3" fill="#a855f7"/>
+                        <circle cx="83" cy="56" r="3" fill="#38bdf8"/>
+                        <circle cx="79" cy="67" r="3" fill="#c084fc"/>
+                        <!-- Botón Play Central -->
+                        <circle cx="60" cy="50" r="13" fill="#051329" stroke="#22d3ee" stroke-width="3"/>
+                        <polygon points="56,43 56,57 68,50" fill="#38bdf8"/>
+                        <!-- Texto IA TUTORIALES -->
+                        <text x="60" y="115" text-anchor="middle" fill="#22d3ee" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="23" letter-spacing="1">IA</text>
+                        <text x="60" y="129" text-anchor="middle" fill="#bae6fd" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="11.5" letter-spacing="1.5">TUTORIALES</text>
+                    </svg>
+                </div>
+
+                <div class="flex flex-col items-start text-left overflow-hidden">
+                    <span class="text-[10px] uppercase tracking-[0.16em] text-amber-400 font-bold truncate">Capital Estratégico</span>
+                    <span id="header-active-title" class="text-xs font-semibold text-slate-200 truncate max-w-[135px] sm:max-w-xs">Inicio y Propósito</span>
+                </div>
+            </div>
+
+            <div id="tab-counter-badge" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-amber-400 font-mono text-xs font-bold shrink-0">
+                1/14
+            </div>
+        </div>
+
+        <!-- Barra de Pestañas Horizontal con Desplazamiento Táctil y Auto-Centrado -->
+        <nav id="top-tabs-bar" aria-label="Navegación de secciones"
+            class="flex items-center gap-2 overflow-x-auto no-scrollbar px-3 py-2 bg-dark-900/90 border-t border-slate-800/60 scroll-smooth">
+            <!-- Inyectado dinámicamente por JS -->
+        </nav>
+    </header>
+
+    <!-- MENÚ SÁNDWICH (DRAWER VERTICAL COMPLETO) -->
+    <div id="drawer-backdrop" onclick="toggleDrawer(false)"
+        class="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs hidden opacity-0 transition-opacity duration-200"></div>
+    
+    <aside id="drawer-panel" aria-label="Índice Completo"
+        class="fixed top-0 left-0 bottom-0 z-50 w-[86vw] max-w-sm bg-dark-900 border-r border-slate-800 flex flex-col transform -translate-x-full transition-transform duration-300 ease-out shadow-2xl">
+        
+        <div class="p-4 border-b border-slate-800 flex items-center justify-between bg-dark-950">
+            <div>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-amber-400 block">Navegación Directa</span>
+                <h2 class="font-display font-extrabold text-base text-white">Índice del Documento</h2>
+            </div>
+            <button onclick="toggleDrawer(false)" aria-label="Cerrar Índice"
+                class="p-2 rounded-xl bg-slate-800/80 text-slate-300 hover:text-white hover:bg-slate-700 active:scale-95">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <div id="drawer-links-list" class="flex-1 overflow-y-auto p-3 space-y-1.5">
+            <!-- Inyectado dinámicamente por JS -->
+        </div>
+
+        <div class="p-3.5 border-t border-slate-800 bg-dark-950 text-center">
+            <p class="text-xs text-slate-400 font-medium">El Tiempo como Capital Estratégico</p>
+            <p class="text-[11px] text-amber-400/90 font-semibold mt-0.5">Rubén Sbarsky • 17/11/2026</p>
+        </div>
+    </aside>
+
+    <!-- CONTENEDOR PRINCIPAL DE CONTENIDO -->
+    <main id="main-container" class="flex-1 max-w-3xl w-full mx-auto px-3.5 sm:px-6 pt-5 pb-28">
+
+        <!-- ==========================================
+             PESTAÑA 0: INICIO Y PROPÓSITO
+             ========================================== -->
+        <section id="tab-0" class="tab-pane active" data-title="Inicio y Propósito">
+            <!-- Hero Exclusivo con Logo pequeño arriba junto al título y "by Rubén Sbarsky" solo en INICIO -->
+            <div class="relative rounded-2xl overflow-hidden p-5 sm:p-8 mb-6 bg-gradient-to-br from-amber-500/20 via-dark-800 to-dark-900 border border-amber-500/30 shadow-2xl">
+                <div class="flex items-center justify-between gap-3 mb-4">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
+                        <span>Ensayo Práctico y Guía Estratégica</span>
+                    </div>
+                </div>
+
+                <!-- Bloque de Título Principal + Logo Pequeño IA TUTORIALES -->
+                <div class="flex items-center gap-3.5 sm:gap-5 mb-3">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#040b1e] border-2 border-cyan-400/60 p-1 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+                        <img src="logo tutoriales IA.jpeg" alt="IA Tutoriales Logo"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                            class="w-full h-full object-contain rounded-xl" />
+                        <svg viewBox="0 0 120 135" class="w-full h-full hidden" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="shieldGradHero" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#22d3ee"/>
+                                    <stop offset="60%" stop-color="#38bdf8"/>
+                                    <stop offset="100%" stop-color="#a855f7"/>
+                                </linearGradient>
+                            </defs>
+                            <path d="M60 8 C32 8 18 18 18 22 C18 62 32 86 60 98 C88 86 102 62 102 22 C102 18 88 8 60 8 Z" stroke="url(#shieldGradHero)" stroke-width="4.5" fill="#06122e"/>
+                            <path d="M56 24 C44 22 36 30 37 40 C31 43 30 53 36 58 C32 65 37 75 46 76 C51 77 56 74 56 68" stroke="#22d3ee" stroke-width="3.5" stroke-linecap="round"/>
+                            <path d="M46 36 C42 40 44 46 50 47 M42 54 C46 57 50 55 53 52 M45 66 C48 64 52 65 55 62" stroke="#22d3ee" stroke-width="2.8" stroke-linecap="round"/>
+                            <path d="M64 25 H74 L80 31 M64 38 H78 L85 45 M64 62 H77 L83 56 M64 73 H73 L79 67" stroke="#c084fc" stroke-width="2.8" stroke-linecap="round"/>
+                            <circle cx="80" cy="31" r="3" fill="#22d3ee"/>
+                            <circle cx="85" cy="45" r="3" fill="#a855f7"/>
+                            <circle cx="83" cy="56" r="3" fill="#38bdf8"/>
+                            <circle cx="79" cy="67" r="3" fill="#c084fc"/>
+                            <circle cx="60" cy="50" r="13" fill="#051329" stroke="#22d3ee" stroke-width="3"/>
+                            <polygon points="56,43 56,57 68,50" fill="#38bdf8"/>
+                            <text x="60" y="115" text-anchor="middle" fill="#22d3ee" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="23" letter-spacing="1">IA</text>
+                            <text x="60" y="129" text-anchor="middle" fill="#bae6fd" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="11.5" letter-spacing="1.5">TUTORIALES</text>
+                        </svg>
+                    </div>
+
+                    <h1 class="font-display font-extrabold text-xl sm:text-4xl text-white leading-tight tracking-tight">
+                        EL TIEMPO COMO CAPITAL ESTRATÉGICO <span class="text-amber-400 block sm:inline mt-1 sm:mt-0">by Rubén Sbarsky</span>
+                    </h1>
+                </div>
+
+                <h2 class="text-base sm:text-xl text-slate-200 font-medium leading-relaxed">
+                    La ventana temporal: crear, proteger y ampliar el margen para alcanzar un objetivo
+                </h2>
+            </div>
+
+            <!-- Introducción -->
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4">
+                <div class="flex items-center gap-2.5 border-b border-slate-800 pb-3">
+                    <span class="w-2.5 h-6 rounded-full bg-amber-500"></span>
+                    <h3 class="font-display font-bold text-xl text-white">Introducción</h3>
+                </div>
+
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Hay recursos cuyo valor no depende solamente de cuánto tenemos, sino también de <strong class="text-white font-semibold">cuándo están disponibles</strong>. El dinero, los conocimientos, los contactos, los materiales y la capacidad de trabajo pueden resultar insuficientes si llegan después de que haya vencido el plazo en el que podían utilizarse.
+                </p>
+
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Podemos disponer de un millón de euros y, sin embargo, no poder resolver una situación cuyo plazo venció ayer. En cambio, disponer de unos días adicionales puede permitirnos encontrar financiación, negociar, conseguir información, construir alternativas o evitar que una situación se vuelva irreversible.
+                </p>
+
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base font-medium">
+                    De ahí nace una idea central:
+                </p>
+
+                <blockquote class="quote-box p-4 sm:p-5 rounded-r-xl my-4">
+                    <p class="text-amber-300 font-display font-bold text-base sm:text-lg leading-snug">
+                        “El tiempo no es solamente algo que transcurre. También puede ser un capital estratégico que se utiliza para construir capacidad de acción.”
+                    </p>
+                </blockquote>
+
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Esta perspectiva permite comprender mejor las negociaciones, los negocios, los proyectos, las crisis personales, la logística y también ciertos aspectos de la historia militar.
+                </p>
+
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    El propósito de este documento es desarrollar esa idea y, especialmente, estudiar el concepto de <strong class="text-amber-400 font-semibold">ventana temporal</strong>: el intervalo durante el cual todavía existen condiciones para actuar y alcanzar un objetivo.
+                </p>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 1: EL TIEMPO COMO ACTIVO ESTRATÉGICO
+             ========================================== -->
+        <section id="tab-1" class="tab-pane" data-title="Activo Estratégico">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Sección Fundamental</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">1. El tiempo como activo estratégico</h2>
+            </div>
+
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4 mb-6">
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Un activo es algo que puede utilizarse para producir valor o alcanzar un resultado. El tiempo puede cumplir esa función cuando se dispone de él y se lo emplea deliberadamente.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    No basta con tener tiempo en el calendario. Es necesario conservar la posibilidad real de actuar durante ese período.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Por ejemplo, una persona puede tener treinta días antes de una fecha límite. Si dedica esos treinta días a esperar, habrá consumido el plazo sin mejorar su posición. Si los utiliza para conseguir información, negociar, localizar recursos y preparar alternativas, habrá transformado el tiempo en capacidad.
+                </p>
+
+                <div class="pt-3">
+                    <h3 class="font-display font-bold text-lg text-amber-400 mb-3">Cuatro conceptos que conviene distinguir</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+                            <span class="text-amber-400 font-bold block mb-1">Patrimonio:</span>
+                            <p class="text-slate-300 text-sm">los recursos y bienes que se poseen.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+                            <span class="text-amber-400 font-bold block mb-1">Liquidez:</span>
+                            <p class="text-slate-300 text-sm">la capacidad de disponer de dinero cuando hace falta.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+                            <span class="text-amber-400 font-bold block mb-1">Plazo:</span>
+                            <p class="text-slate-300 text-sm">el límite temporal para realizar una acción o cumplir una obligación.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+                            <span class="text-amber-400 font-bold block mb-1">Margen de maniobra:</span>
+                            <p class="text-slate-300 text-sm">el conjunto de opciones que todavía pueden ejecutarse.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base pt-2">
+                    El patrimonio no garantiza liquidez inmediata. La liquidez no garantiza que se llegue a tiempo. Y disponer de tiempo no garantiza por sí solo una solución. La ventaja aparece cuando los recursos y el margen temporal se combinan con una estrategia viable.
+                </p>
+            </div>
+
+            <!-- 1.1 El tiempo como oxígeno -->
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4 mb-6">
+                <h3 class="font-display font-bold text-xl text-white">1.1. El tiempo como oxígeno</h3>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Cuando una persona o una organización está bajo presión, el tiempo adicional puede funcionar como oxígeno.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Un plazo ampliado puede permitir:
+                </p>
+                <ul class="space-y-2 text-slate-300 text-[15px] sm:text-base pl-1">
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>evitar una decisión precipitada;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>reunir documentación;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>buscar asesoramiento;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>conseguir financiación;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>localizar proveedores o colaboradores;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>negociar nuevas condiciones;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>preparar una alternativa;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>reducir el riesgo de que una situación se vuelva irreversible.</span></li>
+                </ul>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Por eso, una prórroga no es necesariamente una solución. Es una oportunidad para construirla.
+                </p>
+                <blockquote class="quote-box p-4 rounded-r-xl">
+                    <p class="text-amber-300 font-display font-bold text-base">
+                        “El tiempo concedido no es el resultado: es el espacio en el que todavía podemos trabajar para conseguirlo.”
+                    </p>
+                </blockquote>
+            </div>
+
+            <!-- 1.2 El tiempo tiene valor porque las oportunidades vencen -->
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4">
+                <h3 class="font-display font-bold text-xl text-white">1.2. El tiempo tiene valor porque las oportunidades vencen</h3>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Un recurso puede conservar su valor material y perder su utilidad para un objetivo concreto si llega tarde.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Un millón de euros puede ser mucho dinero, pero quizá no sirva para evitar una consecuencia que ya se produjo por el vencimiento de un plazo. Una herramienta, una autorización o una oferta también pueden perder utilidad si la oportunidad de emplearlas desaparece.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Esto introduce una distinción esencial:
+                </p>
+                <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30">
+                    <p class="text-white font-bold text-[15px] sm:text-base">
+                        No basta con preguntar qué recursos tenemos. También debemos preguntar hasta cuándo podremos utilizarlos eficazmente.
+                    </p>
+                </div>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 2: ¿QUÉ ES UNA VENTANA TEMPORAL?
+             ========================================== -->
+        <section id="tab-2" class="tab-pane" data-title="Ventana Temporal">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Concepto Nuclear</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">2. ¿Qué es una ventana temporal?</h2>
+            </div>
+
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4 mb-6">
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Una <strong class="text-amber-400 font-semibold">ventana temporal de oportunidad</strong> es el intervalo durante el cual existen condiciones suficientes para realizar una acción, aprovechar una oportunidad o avanzar hacia un objetivo.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    La ventana tiene, como mínimo, tres elementos:
+                </p>
+
+                <div class="grid grid-cols-1 gap-3 pt-1">
+                    <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-amber-500 text-slate-950 font-extrabold flex items-center justify-center shrink-0 text-sm">1</span>
+                        <div>
+                            <strong class="text-white block">Apertura:</strong>
+                            <span class="text-slate-300 text-sm">aparece una oportunidad o se crea una condición que permite actuar.</span>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-amber-500 text-slate-950 font-extrabold flex items-center justify-center shrink-0 text-sm">2</span>
+                        <div>
+                            <strong class="text-white block">Duración:</strong>
+                            <span class="text-slate-300 text-sm">se mantiene durante cierto período, que puede ser estable o cambiante.</span>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-amber-500 text-slate-950 font-extrabold flex items-center justify-center shrink-0 text-sm">3</span>
+                        <div>
+                            <strong class="text-white block">Cierre:</strong>
+                            <span class="text-slate-300 text-sm">desaparecen las condiciones necesarias, vence un plazo o se pierde la oportunidad.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base pt-2">
+                    La ventana no siempre coincide con una fecha administrativa. Puede cerrarse antes por un cambio de circunstancias, por la pérdida de confianza, por la retirada de una oferta, por una decisión de terceros o por la aparición de un obstáculo.
+                </p>
+            </div>
+
+            <!-- Ejemplo sencillo -->
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4 mb-6 border-l-4 border-l-emerald-500">
+                <h3 class="font-display font-bold text-xl text-emerald-400">Ejemplo sencillo</h3>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Una persona dispone de sesenta días para encontrar una solución habitacional.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Esos sesenta días no son simplemente una cuenta atrás. Son una ventana en la que puede:
+                </p>
+                <ul class="space-y-2 text-slate-300 text-[15px] sm:text-base pl-1">
+                    <li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold">•</span><span>identificar localidades y viviendas;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold">•</span><span>contactar con propietarios y administraciones;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold">•</span><span>comprobar condiciones reales;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold">•</span><span>reunir documentación;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold">•</span><span>estudiiar ayudas disponibles;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold">•</span><span>negociar fechas y garantías;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-emerald-400 font-bold">•</span><span>preparar una alternativa si la primera opción falla.</span></li>
+                </ul>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    La estrategia no consiste en esperar hasta el día cincuenta y nueve. Consiste en utilizar el intervalo para llegar al final con una solución o con alternativas suficientemente desarrolladas.
+                </p>
+            </div>
+
+            <!-- 2.1 La ventana no es siempre igual de favorable -->
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4">
+                <h3 class="font-display font-bold text-xl text-white">2.1. La ventana no es siempre igual de favorable</h3>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Una ventana puede permanecer abierta, pero las condiciones pueden empeorar progresivamente.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Por ejemplo:
+                </p>
+                <ul class="space-y-2 text-slate-300 text-[15px] sm:text-base pl-1">
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>una oferta puede seguir disponible, pero quedar menos tiempo para organizar el traslado;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>una negociación puede continuar, pero disminuir la confianza;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>una ayuda puede seguir siendo solicitables, pero requerir trámites que ya no caben en el plazo restante;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>una oportunidad laboral puede existir, pero tener una fecha de incorporación próxima.</span></li>
+                </ul>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Por eso conviene distinguir entre <strong class="text-white">tiempo restante</strong> y <strong class="text-amber-400">tiempo útil</strong>.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    El tiempo restante es el que marca el calendario. El tiempo útil es el que todavía permite ejecutar las acciones necesarias, teniendo en cuenta sus dependencias, demoras y riesgos.
+                </p>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 3: LAS CINCO OPERACIONES SOBRE LA VENTANA TEMPORAL
+             ========================================== -->
+        <section id="tab-3" class="tab-pane" data-title="Cinco Operaciones">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Acción Táctica</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">3. Las cinco operaciones sobre la ventana temporal</h2>
+                <p class="text-slate-300 mt-2 text-[15px] sm:text-base">
+                    La ventana temporal no es solamente algo que se recibe. En muchas situaciones se puede influir en ella.
+                </p>
+            </div>
+
+            <div class="space-y-5">
+                <!-- 3.1 -->
+                <div class="agency-card rounded-2xl p-5 sm:p-6 space-y-3">
+                    <h3 class="font-display font-bold text-xl text-amber-400">3.1. Crear la ventana</h3>
+                    <p class="text-slate-300 text-[15px] sm:text-base leading-relaxed">
+                        Crear una ventana significa conseguir que aparezca un período en el que antes no había margen suficiente.
+                    </p>
+                    <p class="text-slate-300 text-[15px] sm:text-base">Algunos ejemplos:</p>
+                    <ul class="space-y-1.5 text-slate-300 text-[15px] sm:text-base pl-1">
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>solicitar una prórroga;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>negociar un calendario de pagos;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>acordar una fase de prueba;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>obtener una autorización provisional;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>conseguir que una oferta se mantenga vigente;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>dividir un proyecto en etapas con fechas distintas.</span></li>
+                    </ul>
+                    <p class="text-slate-300 text-[15px] sm:text-base leading-relaxed pt-1">
+                        Crear tiempo no significa engañar ni eludir obligaciones. Significa negociar condiciones realistas y transparentes para poder actuar.
+                    </p>
+                </div>
+
+                <!-- 3.2 -->
+                <div class="agency-card rounded-2xl p-5 sm:p-6 space-y-3">
+                    <h3 class="font-display font-bold text-xl text-amber-400">3.2. Ampliar la ventana</h3>
+                    <p class="text-slate-300 text-[15px] sm:text-base leading-relaxed">
+                        Ampliar la ventana consiste en prolongar un período favorable.
+                    </p>
+                    <p class="text-slate-300 text-[15px] sm:text-base">Puede lograrse mediante:</p>
+                    <ul class="space-y-1.5 text-slate-300 text-[15px] sm:text-base pl-1">
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>avances verificables;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>comunicación anticipada;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>cumplimiento de compromisos parciales;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>propuestas concretas;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>acuerdos por etapas;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>demostración de que el tiempo adicional se utilizará de manera productiva.</span></li>
+                    </ul>
+                    <p class="text-slate-300 text-[15px] sm:text-base leading-relaxed pt-1">
+                        Una petición de más tiempo resulta más sólida cuando va acompañada de un plan: qué se hará, en qué orden, con qué recursos y qué resultado se espera.
+                    </p>
+                </div>
+
+                <!-- 3.3 -->
+                <div class="agency-card rounded-2xl p-5 sm:p-6 space-y-3">
+                    <h3 class="font-display font-bold text-xl text-amber-400">3.3. Proteger la ventana</h3>
+                    <p class="text-slate-300 text-[15px] sm:text-base leading-relaxed">
+                        Una ventana puede cerrarse antes de la fecha prevista. Protegerla significa evitar acciones que destruyan innecesariamente el margen disponible.
+                    </p>
+                    <p class="text-slate-300 text-[15px] sm:text-base">Algunas medidas:</p>
+                    <ul class="space-y-1.5 text-slate-300 text-[15px] sm:text-base pl-1">
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>no ocultar problemas que la otra parte necesita conocer;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>no prometer lo que no se puede cumplir;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>no dejar comunicaciones importantes sin respuesta;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>no provocar conflictos evitables;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>verificar fechas, condiciones y requisitos;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>conservar pruebas de acuerdos y gestiones;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>no depender de una sola alternativa.</span></li>
+                    </ul>
+                    <p class="text-slate-300 text-[15px] sm:text-base leading-relaxed pt-1">
+                        Proteger la ventana no es permanecer inmóvil. Es evitar que errores evitables reduzcan las opciones disponibles.
+                    </p>
+                </div>
+
+                <!-- 3.4 -->
+                <div class="agency-card rounded-2xl p-5 sm:p-6 space-y-3">
+                    <h3 class="font-display font-bold text-xl text-amber-400">3.4. Aprovechar la ventana</h3>
+                    <p class="text-slate-300 text-[15px] sm:text-base leading-relaxed">
+                        El tiempo concedido debe convertirse en capacidad.
+                    </p>
+                    <p class="text-slate-300 text-[15px] sm:text-base">
+                        Una forma práctica de hacerlo es asignar a cada período una producción concreta:
+                    </p>
+                    <ul class="space-y-1.5 text-slate-300 text-[15px] sm:text-base pl-1">
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>información obtenida;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>contactos realizados;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>documentación reunida;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>recursos localizados;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>acuerdos alcanzados;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>riesgos reducidos;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>alternativas preparadas.</span></li>
+                    </ul>
+                    <p class="text-slate-300 text-[15px] sm:text-base pt-1">
+                        La pregunta diaria no debería ser solamente «¿cuánto tiempo queda?», sino:
+                    </p>
+                    <blockquote class="quote-box p-4 rounded-r-xl">
+                        <p class="text-amber-300 font-display font-bold text-base">
+                            “¿Qué capacidad nueva he construido hoy con el tiempo que todavía tengo?”
+                        </p>
+                    </blockquote>
+                </div>
+
+                <!-- 3.5 -->
+                <div class="agency-card rounded-2xl p-5 sm:p-6 space-y-3">
+                    <h3 class="font-display font-bold text-xl text-amber-400">3.5. Crear una nueva ventana</h3>
+                    <p class="text-slate-300 text-[15px] sm:text-base leading-relaxed">
+                        Una estrategia no debería depender de conseguir prórrogas indefinidamente.
+                    </p>
+                    <p class="text-slate-300 text-[15px] sm:text-base leading-relaxed">
+                        El objetivo es utilizar la ventana actual para alcanzar una situación que permita abrir otra: una solución estable, un acuerdo nuevo, una fuente de ingresos, una alternativa operativa o una mayor independencia.
+                    </p>
+                    <p class="text-white font-semibold text-[15px] sm:text-base leading-relaxed">
+                        La mejor prórroga es aquella que deja de ser necesaria porque se ha resuelto el problema que la hacía imprescindible.
+                    </p>
+                </div>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 4: LA COLABORACIÓN COMO FORMA DE CONSEGUIR MARGEN TEMPORAL
+             ========================================== -->
+        <section id="tab-4" class="tab-pane" data-title="Colaboración y Margen">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Alianzas y Confianza</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">4. La colaboración como forma de conseguir margen temporal</h2>
+            </div>
+
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4 mb-6">
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Una de las formas de ampliar una ventana temporal es conseguir que la otra parte tenga razones para colaborar.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    La colaboración puede modificar la disposición de una persona, empresa o institución a conceder flexibilidad.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base font-medium">
+                    La secuencia puede ser:
+                </p>
+
+                <ol class="space-y-2.5 text-slate-200 text-[15px] sm:text-base">
+                    <li class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <span class="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-bold text-xs flex items-center justify-center shrink-0">1</span>
+                        <span>Comprender qué necesita la otra parte.</span>
+                    </li>
+                    <li class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <span class="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-bold text-xs flex items-center justify-center shrink-0">2</span>
+                        <span>Identificar dónde se pueden alinear los intereses.</span>
+                    </li>
+                    <li class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <span class="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-bold text-xs flex items-center justify-center shrink-0">3</span>
+                        <span>Facilitar tareas o resolver dificultades reales.</span>
+                    </li>
+                    <li class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <span class="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-bold text-xs flex items-center justify-center shrink-0">4</span>
+                        <span>Comunicar con claridad los propios límites y necesidades.</span>
+                    </li>
+                    <li class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <span class="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-bold text-xs flex items-center justify-center shrink-0">5</span>
+                        <span>Proponer un acuerdo que resulte razonable para ambas partes.</span>
+                    </li>
+                    <li class="flex items-center gap-3 p-3 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <span class="w-6 h-6 rounded-full bg-amber-500 text-slate-950 font-bold text-xs flex items-center justify-center shrink-0">6</span>
+                        <span>Cumplir lo acordado y mantener la confianza.</span>
+                    </li>
+                </ol>
+
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base pt-2">
+                    Cuando la otra parte percibe cooperación genuina, puede estar más dispuesta a escuchar, negociar y conceder margen.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Esto no garantiza una prórroga. La otra parte puede tener límites legales, contractuales, económicos u operativos que no pueda modificar. Tampoco conviene confundir la buena voluntad con un derecho adquirido.
+                </p>
+            </div>
+
+            <!-- 4.1 Reciprocidad y confianza -->
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4 mb-6">
+                <h3 class="font-display font-bold text-xl text-white">4.1. Reciprocidad y confianza</h3>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    La reciprocidad es una tendencia humana: cuando alguien recibe ayuda o cooperación, puede sentirse más dispuesto a corresponder.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    En una negociación, la confianza puede reducir la rigidez y facilitar soluciones que serían difíciles en un clima de enfrentamiento.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Sin embargo, la colaboración estratégica no debería convertirse en una actuación teatral. La cooperación falsa puede producir ventajas puntuales, pero deteriora la confianza cuando se descubre.
+                </p>
+                <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30">
+                    <p class="text-amber-300 font-bold text-[15px] sm:text-base">
+                        La colaboración más útil es aquella en la que ambas partes obtienen un beneficio real.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 4.2 Una petición de tiempo bien planteada -->
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4">
+                <h3 class="font-display font-bold text-xl text-white">4.2. Una petición de tiempo bien planteada</h3>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Una solicitud de ampliación de plazo suele ser más convincente si contiene cuatro elementos:
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <strong class="text-amber-400 block mb-1">Situación:</strong>
+                        <span class="text-slate-300 text-sm">explicar de forma breve y honesta qué ocurre.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <strong class="text-amber-400 block mb-1">Responsabilidad:</strong>
+                        <span class="text-slate-300 text-sm">reconocer qué parte depende de uno y qué compromisos se mantienen.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <strong class="text-amber-400 block mb-1">Plan:</strong>
+                        <span class="text-slate-300 text-sm">detallar qué se hará durante el tiempo solicitado.</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800">
+                        <strong class="text-amber-400 block mb-1">Fecha o hito:</strong>
+                        <span class="text-slate-300 text-sm">proponer cuándo se revisará el avance o se alcanzará un resultado.</span>
+                    </div>
+                </div>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base pt-1">
+                    No se trata de pedir tiempo de manera indefinida, sino de explicar por qué un período concreto puede producir un resultado mejor y más seguro.
+                </p>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 5: LA VENTANA TEMPORAL EN LA ESTRATEGIA MILITAR
+             ========================================== -->
+        <section id="tab-5" class="tab-pane" data-title="Estrategia Militar">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Perspectiva Histórica</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">5. La ventana temporal en la estrategia militar</h2>
+            </div>
+
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4 mb-6">
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    La guerra es una tragedia humana. Su estudio histórico, sin embargo, permite observar de manera extrema cuestiones de logística, coordinación, desgaste, información, alianzas y tiempo.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Una fuerza militar puede conservar armas y personal, pero perder la posibilidad de alcanzar su objetivo. También puede tener recursos limitados y, mediante decisiones adecuadas, conservar capacidad de resistencia durante más tiempo.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    La idea no debe simplificarse: las guerras no se pierden siempre por agotamiento del tiempo. Influyen factores políticos, militares, económicos, sociales, geográficos y humanos. Pero el tiempo puede ser decisivo.
+                </p>
+            </div>
+
+            <div class="space-y-5">
+                <!-- 5.1 -->
+                <div class="agency-card rounded-2xl p-5 sm:p-6 space-y-3">
+                    <h3 class="font-display font-bold text-xl text-amber-400">5.1. Recursos disponibles y oportunidad de utilizarlos</h3>
+                    <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                        Las municiones, el combustible, los alimentos, el transporte y el personal son recursos. Para producir un efecto, deben estar disponibles en el lugar y en el momento necesarios.
+                    </p>
+                    <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                        Un recurso que llega demasiado tarde puede no servir para la operación prevista.
+                    </p>
+                    <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                        La logística muestra que no basta con poseer recursos: hay que poder moverlos, mantenerlos y utilizarlos dentro de la ventana adecuada.
+                    </p>
+                </div>
+
+                <!-- 5.2 -->
+                <div class="agency-card rounded-2xl p-5 sm:p-6 space-y-3">
+                    <h3 class="font-display font-bold text-xl text-amber-400">5.2. El desgaste y la duración</h3>
+                    <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                        En conflictos prolongados, la capacidad de sostener el esfuerzo puede ser tan importante como la capacidad de obtener una ventaja inmediata.
+                    </p>
+                    <p class="text-slate-300 text-[15px] sm:text-base">El tiempo puede afectar:</p>
+                    <ul class="space-y-1.5 text-slate-300 text-[15px] sm:text-base pl-1">
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>la disponibilidad de suministros;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>la economía que sostiene el esfuerzo;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>la moral y la cohesión;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>el apoyo político y social;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>las alianzas;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>la capacidad de reemplazar pérdidas;</span></li>
+                        <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>la voluntad de continuar.</span></li>
+                    </ul>
+                    <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base pt-1">
+                        La duración no favorece automáticamente a un bando. Depende de quién puede sostener mejor los costes y de cómo cambian los objetivos y las condiciones.
+                    </p>
+                </div>
+
+                <!-- 5.3 -->
+                <div class="agency-card rounded-2xl p-5 sm:p-6 space-y-3">
+                    <h3 class="font-display font-bold text-xl text-amber-400">5.3. Fabio Máximo y la estrategia de evitar una batalla desfavorable</h3>
+                    <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                        Durante la Segunda Guerra Púnica, el general romano Quinto Fabio Máximo evitó en determinadas circunstancias presentar batalla directa a Aníbal, cuya capacidad militar suponía un peligro importante para Roma.
+                    </p>
+                    <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                        La estrategia asociada a Fabio Máximo buscaba preservar las fuerzas romanas y desgastar al adversario, en lugar de arriesgarlo todo en un enfrentamiento inmediato bajo condiciones desfavorables. De ahí procede la expresión «estrategia fabiana».
+                    </p>
+                    <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                        La enseñanza general no es que evitar siempre el enfrentamiento sea correcto. Es que <strong class="text-white">no toda oportunidad de combatir es una oportunidad conveniente</strong>, y que conservar la capacidad de actuar mañana puede ser más importante que buscar una decisión inmediata.
+                    </p>
+                </div>
+
+                <!-- 5.4 -->
+                <div class="agency-card rounded-2xl p-5 sm:p-6 space-y-3">
+                    <h3 class="font-display font-bold text-xl text-amber-400">5.4. La retirada y la preservación de opciones</h3>
+                    <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                        Una retirada puede ser una decisión destinada a conservar fuerzas y evitar una pérdida mayor. No equivale necesariamente a una derrota definitiva.
+                    </p>
+                    <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                        En términos estratégicos, preservar recursos y opciones puede permitir reorganizarse y actuar en mejores condiciones.
+                    </p>
+                    <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                        La misma lógica aparece en negocios y proyectos: detener una iniciativa, cambiar de método o abandonar una opción inviable puede conservar recursos para alcanzar el objetivo por otra vía.
+                    </p>
+                </div>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 6: CUATRO FORMAS DE AGOTAMIENTO
+             ========================================== -->
+        <section id="tab-6" class="tab-pane" data-title="Formas de Agotamiento">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Diagnóstico de Riesgo</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">6. Cuatro formas de agotamiento</h2>
+                <p class="text-slate-300 mt-2 text-[15px] sm:text-base">
+                    Para analizar una situación con presión temporal, conviene distinguir distintos tipos de agotamiento.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+                <div class="agency-card rounded-2xl p-5 space-y-2 border-t-4 border-t-amber-500">
+                    <h3 class="font-display font-bold text-lg text-white">6.1. Agotamiento material</h3>
+                    <p class="text-slate-300 text-sm sm:text-[15px] leading-relaxed">
+                        Se agotan los recursos físicos o financieros necesarios: dinero, suministros, herramientas, materiales o capacidad de producción.
+                    </p>
+                </div>
+
+                <div class="agency-card rounded-2xl p-5 space-y-2 border-t-4 border-t-orange-500">
+                    <h3 class="font-display font-bold text-lg text-white">6.2. Agotamiento humano</h3>
+                    <p class="text-slate-300 text-sm sm:text-[15px] leading-relaxed">
+                        Se reduce la capacidad de las personas para sostener el esfuerzo: energía, salud, disponibilidad, conocimientos, motivación o personal.
+                    </p>
+                </div>
+
+                <div class="agency-card rounded-2xl p-5 space-y-2 border-t-4 border-t-rose-500">
+                    <h3 class="font-display font-bold text-lg text-white">6.3. Agotamiento económico</h3>
+                    <p class="text-slate-300 text-sm sm:text-[15px] leading-relaxed">
+                        La organización ya no puede financiar la continuidad de sus operaciones o asumir los costes necesarios.
+                    </p>
+                </div>
+
+                <div class="agency-card rounded-2xl p-5 space-y-2 border-t-4 border-t-red-500">
+                    <h3 class="font-display font-bold text-lg text-white">6.4. Agotamiento temporal</h3>
+                    <p class="text-slate-300 text-sm sm:text-[15px] leading-relaxed">
+                        Se cierra la oportunidad de alcanzar el objetivo en las condiciones previstas. Puede ocurrir aunque todavía existan recursos materiales y económicos.
+                    </p>
+                </div>
+            </div>
+
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4">
+                <p class="text-slate-300 text-[15px] sm:text-base font-medium">
+                    El agotamiento temporal puede producirse por:
+                </p>
+                <ul class="space-y-2 text-slate-300 text-[15px] sm:text-base pl-1">
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>vencimiento de un plazo;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>pérdida de una autorización;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>cierre de una oferta;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>cambio de circunstancias;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>pérdida de una oportunidad de mercado;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>llegada tardía de un recurso;</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>imposibilidad de completar a tiempo una secuencia de tareas.</span></li>
+                </ul>
+                <p class="text-white font-semibold leading-relaxed text-[15px] sm:text-base pt-2">
+                    No siempre se puede recuperar una oportunidad cerrada. Por eso, identificar las fechas críticas es una parte esencial de cualquier estrategia.
+                </p>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 7: TRES TIPOS DE VENTANAS TEMPORALES
+             ========================================== -->
+        <section id="tab-7" class="tab-pane" data-title="Tipos de Ventanas">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Clasificación Operativa</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">7. Tres tipos de ventanas temporales</h2>
+                <p class="text-slate-300 mt-2 text-[15px] sm:text-base">
+                    No todas las ventanas pueden gestionarse de la misma manera.
+                </p>
+            </div>
+
+            <div class="agency-card rounded-2xl overflow-hidden mb-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/95 border-b border-slate-800 text-amber-400 text-xs uppercase tracking-wider">
+                                <th class="p-3.5 sm:p-4 font-bold">Tipo de ventana</th>
+                                <th class="p-3.5 sm:p-4 font-bold">Característica</th>
+                                <th class="p-3.5 sm:p-4 font-bold">Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/80 text-sm sm:text-[15px]">
+                            <tr class="hover:bg-slate-900/40">
+                                <td class="p-3.5 sm:p-4 font-bold text-white whitespace-nowrap">Controlable</td>
+                                <td class="p-3.5 sm:p-4 text-slate-300">La persona u organización puede decidir su duración dentro de ciertos límites.</td>
+                                <td class="p-3.5 sm:p-4 text-slate-300">Reservar tiempo propio para completar una tarea.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40">
+                                <td class="p-3.5 sm:p-4 font-bold text-amber-400 whitespace-nowrap">Negociable</td>
+                                <td class="p-3.5 sm:p-4 text-slate-300">Su duración depende de un acuerdo con otra parte.</td>
+                                <td class="p-3.5 sm:p-4 text-slate-300">Solicitar una prórroga contractual.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-900/40">
+                                <td class="p-3.5 sm:p-4 font-bold text-emerald-400 whitespace-nowrap">Externa</td>
+                                <td class="p-3.5 sm:p-4 text-slate-300">Depende de circunstancias que no se controlan directamente.</td>
+                                <td class="p-3.5 sm:p-4 text-slate-300">Una convocatoria con fecha de cierre fija.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4">
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    La estrategia consiste en identificar qué tipo de ventana tenemos y actuar en consecuencia.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Una ventana externa quizá no pueda ampliarse, pero se puede buscar otra convocatoria. Una ventana negociable puede ampliarse si se presenta una propuesta razonable. Una ventana controlable debe organizarse para no desperdiciarla.
+                </p>
+                <p class="text-white font-medium leading-relaxed text-[15px] sm:text-base">
+                    No todas las ventanas externas son inamovibles, ni todas las negociables pueden ampliarse. Hay que comprobar las condiciones concretas.
+                </p>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 8: EL MÉTODO PRÁCTICO: GESTIONAR UNA VENTANA TEMPORAL
+             ========================================== -->
+        <section id="tab-8" class="tab-pane" data-title="Método Práctico">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Hoja de Ruta en 10 Pasos</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">8. El método práctico: gestionar una ventana temporal</h2>
+                <p class="text-slate-300 mt-2 text-[15px] sm:text-base">
+                    El siguiente procedimiento puede utilizarse en una negociación, un proyecto, una crisis económica o una decisión personal.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Paso 1 -->
+                <div class="agency-card rounded-2xl p-5 space-y-2">
+                    <h3 class="font-display font-bold text-lg text-amber-400">Paso 1. Definir el objetivo</h3>
+                    <p class="text-slate-300 text-[15px] leading-relaxed">Escribir el resultado que se quiere conseguir en términos concretos y verificables.</p>
+                    <p class="text-slate-300 text-[15px] leading-relaxed">No es lo mismo «resolver mi situación» que «conseguir una vivienda disponible, dentro de un presupuesto determinado, antes de una fecha concreta».</p>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="agency-card rounded-2xl p-5 space-y-2">
+                    <h3 class="font-display font-bold text-lg text-amber-400">Paso 2. Identificar el cierre</h3>
+                    <p class="text-slate-300 text-[15px]">Anotar:</p>
+                    <ul class="space-y-1 text-slate-300 text-[15px] pl-1">
+                        <li>• fecha límite formal;</li>
+                        <li>• fecha límite real;</li>
+                        <li>• posibles cierres anticipados;</li>
+                        <li>• consecuencias de no llegar a tiempo;</li>
+                        <li>• trámites que requieren plazos de respuesta.</li>
+                    </ul>
+                    <p class="text-slate-300 text-[15px] leading-relaxed pt-1">Conviene verificar si el plazo es legal, contractual, administrativo, comercial o simplemente una fecha de planificación. No todos tienen las mismas consecuencias.</p>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="agency-card rounded-2xl p-5 space-y-2">
+                    <h3 class="font-display font-bold text-lg text-amber-400">Paso 3. Calcular el tiempo útil</h3>
+                    <p class="text-slate-300 text-[15px] leading-relaxed">Estimar cuánto tiempo requieren las acciones necesarias.</p>
+                    <p class="text-slate-300 text-[15px] leading-relaxed">Si una gestión tarda veinte días, no conviene iniciarla cuando quedan veinte días exactos: pueden existir demoras, errores, días no laborables o requisitos adicionales.</p>
+                    <p class="text-slate-300 text-[15px] leading-relaxed">Añadir un margen de seguridad siempre que sea posible.</p>
+                </div>
+
+                <!-- Paso 4 -->
+                <div class="agency-card rounded-2xl p-5 space-y-2">
+                    <h3 class="font-display font-bold text-lg text-amber-400">Paso 4. Identificar dependencias</h3>
+                    <p class="text-slate-300 text-[15px] leading-relaxed">Algunas tareas no pueden comenzar hasta que otras hayan terminado.</p>
+                    <p class="text-slate-300 text-[15px]">Por ejemplo:</p>
+                    <ol class="list-decimal list-inside space-y-1 text-slate-300 text-[15px] pl-1">
+                        <li>conseguir documentación;</li>
+                        <li>presentar una solicitud;</li>
+                        <li>recibir una respuesta;</li>
+                        <li>completar un trámite posterior.</li>
+                    </ol>
+                    <p class="text-slate-300 text-[15px] leading-relaxed pt-1">Un retraso en el primer paso puede desplazar toda la secuencia.</p>
+                </div>
+
+                <!-- Paso 5 -->
+                <div class="agency-card rounded-2xl p-5 space-y-2">
+                    <h3 class="font-display font-bold text-lg text-amber-400">Paso 5. Buscar formas legítimas de ampliar el margen</h3>
+                    <p class="text-slate-300 text-[15px]">Considerar:</p>
+                    <ul class="space-y-1 text-slate-300 text-[15px] pl-1">
+                        <li>• prórrogas;</li>
+                        <li>• acuerdos parciales;</li>
+                        <li>• calendarios alternativos;</li>
+                        <li>• entregas por etapas;</li>
+                        <li>• cambios de alcance;</li>
+                        <li>• soluciones provisionales;</li>
+                        <li>• alternativas equivalentes.</li>
+                    </ul>
+                    <p class="text-slate-300 text-[15px] leading-relaxed pt-1">La ampliación debe ser real, confirmada y compatible con las obligaciones aplicables. Una conversación informal no siempre modifica un plazo contractual o legal.</p>
+                </div>
+
+                <!-- Paso 6 -->
+                <div class="agency-card rounded-2xl p-5 space-y-2">
+                    <h3 class="font-display font-bold text-lg text-amber-400">Paso 6. Alinear intereses</h3>
+                    <p class="text-slate-300 text-[15px]">Preguntar:</p>
+                    <ul class="space-y-1 text-slate-300 text-[15px] pl-1">
+                        <li>• ¿Qué necesita la otra parte?</li>
+                        <li>• ¿Qué problema puedo ayudar a resolver?</li>
+                        <li>• ¿Qué puedo ofrecer de manera realista?</li>
+                        <li>• ¿Qué acuerdo permitiría que ambos avancemos?</li>
+                    </ul>
+                </div>
+
+                <!-- Paso 7 -->
+                <div class="agency-card rounded-2xl p-5 space-y-2">
+                    <h3 class="font-display font-bold text-lg text-amber-400">Paso 7. Convertir el tiempo en resultados parciales</h3>
+                    <p class="text-slate-300 text-[15px] leading-relaxed">Dividir el período en hitos. Cada hito debe producir algo comprobable: una llamada realizada, una oferta confirmada, una solicitud presentada, un presupuesto obtenido o una alternativa evaluada.</p>
+                </div>
+
+                <!-- Paso 8 -->
+                <div class="agency-card rounded-2xl p-5 space-y-2">
+                    <h3 class="font-display font-bold text-lg text-amber-400">Paso 8. Preparar una alternativa</h3>
+                    <p class="text-slate-300 text-[15px] leading-relaxed">No depender de una única salida. Una estrategia sólida contempla qué hacer si la primera opción falla.</p>
+                </div>
+
+                <!-- Paso 9 -->
+                <div class="agency-card rounded-2xl p-5 space-y-2">
+                    <h3 class="font-display font-bold text-lg text-amber-400">Paso 9. Revisar la ventana periódicamente</h3>
+                    <p class="text-slate-300 text-[15px]">Actualizar:</p>
+                    <ul class="space-y-1 text-slate-300 text-[15px] pl-1">
+                        <li>• tiempo restante;</li>
+                        <li>• tiempo útil;</li>
+                        <li>• tareas completadas;</li>
+                        <li>• obstáculos;</li>
+                        <li>• riesgos;</li>
+                        <li>• alternativas;</li>
+                        <li>• necesidad de negociar un nuevo margen.</li>
+                    </ul>
+                </div>
+
+                <!-- Paso 10 -->
+                <div class="agency-card rounded-2xl p-5 space-y-2">
+                    <h3 class="font-display font-bold text-lg text-amber-400">Paso 10. Llegar al cierre con capacidad propia</h3>
+                    <p class="text-slate-300 text-[15px] leading-relaxed">El objetivo final es no depender indefinidamente de la indulgencia de otra parte. El tiempo adicional debe utilizarse para construir una situación más estable y autónoma.</p>
+                </div>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 9: ERRORES FRECUENTES AL GESTIONAR EL TIEMPO
+             ========================================== -->
+        <section id="tab-9" class="tab-pane" data-title="Errores Frecuentes">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Prevención de Fallos</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">9. Errores frecuentes al gestionar el tiempo</h2>
+            </div>
+
+            <div class="space-y-3">
+                <div class="agency-card rounded-xl p-4 flex items-start gap-3.5">
+                    <span class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-400 font-bold text-sm flex items-center justify-center shrink-0">1</span>
+                    <p class="text-slate-300 text-[15px] leading-relaxed"><strong class="text-white">Confundir prórroga con solución.</strong> Una fecha nueva no resuelve por sí misma el problema.</p>
+                </div>
+                <div class="agency-card rounded-xl p-4 flex items-start gap-3.5">
+                    <span class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-400 font-bold text-sm flex items-center justify-center shrink-0">2</span>
+                    <p class="text-slate-300 text-[15px] leading-relaxed"><strong class="text-white">Esperar demasiado para negociar.</strong> Pedir margen cuando ya no queda margen puede reducir las opciones.</p>
+                </div>
+                <div class="agency-card rounded-xl p-4 flex items-start gap-3.5">
+                    <span class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-400 font-bold text-sm flex items-center justify-center shrink-0">3</span>
+                    <p class="text-slate-300 text-[15px] leading-relaxed"><strong class="text-white">Prometer resultados imposibles.</strong> Una promesa poco realista puede destruir la confianza.</p>
+                </div>
+                <div class="agency-card rounded-xl p-4 flex items-start gap-3.5">
+                    <span class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-400 font-bold text-sm flex items-center justify-center shrink-0">4</span>
+                    <p class="text-slate-300 text-[15px] leading-relaxed"><strong class="text-white">No calcular los tiempos de terceros.</strong> Algunas respuestas, trámites o entregas no dependen de uno.</p>
+                </div>
+                <div class="agency-card rounded-xl p-4 flex items-start gap-3.5">
+                    <span class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-400 font-bold text-sm flex items-center justify-center shrink-0">5</span>
+                    <p class="text-slate-300 text-[15px] leading-relaxed"><strong class="text-white">Confiar en acuerdos ambiguos.</strong> Es importante confirmar por escrito las condiciones relevantes.</p>
+                </div>
+                <div class="agency-card rounded-xl p-4 flex items-start gap-3.5">
+                    <span class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-400 font-bold text-sm flex items-center justify-center shrink-0">6</span>
+                    <p class="text-slate-300 text-[15px] leading-relaxed"><strong class="text-white">Depender de una sola alternativa.</strong> Si falla, puede cerrarse la ventana sin salida.</p>
+                </div>
+                <div class="agency-card rounded-xl p-4 flex items-start gap-3.5">
+                    <span class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-400 font-bold text-sm flex items-center justify-center shrink-0">7</span>
+                    <p class="text-slate-300 text-[15px] leading-relaxed"><strong class="text-white">Confundir actividad con progreso.</strong> Estar ocupado no significa estar más cerca del objetivo.</p>
+                </div>
+                <div class="agency-card rounded-xl p-4 flex items-start gap-3.5">
+                    <span class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-400 font-bold text-sm flex items-center justify-center shrink-0">8</span>
+                    <p class="text-slate-300 text-[15px] leading-relaxed"><strong class="text-white">No reservar margen de seguridad.</strong> Los imprevistos forman parte de la realidad.</p>
+                </div>
+                <div class="agency-card rounded-xl p-4 flex items-start gap-3.5">
+                    <span class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-400 font-bold text-sm flex items-center justify-center shrink-0">9</span>
+                    <p class="text-slate-300 text-[15px] leading-relaxed"><strong class="text-white">Usar la colaboración como manipulación.</strong> La confianza deteriorada puede cerrar oportunidades futuras.</p>
+                </div>
+                <div class="agency-card rounded-xl p-4 flex items-start gap-3.5">
+                    <span class="w-7 h-7 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-400 font-bold text-sm flex items-center justify-center shrink-0">10</span>
+                    <p class="text-slate-300 text-[15px] leading-relaxed"><strong class="text-white">Esperar hasta el último día.</strong> El tiempo debe invertirse antes de que la presión sea máxima.</p>
+                </div>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 10: PRINCIPIOS Y MÁXIMAS
+             ========================================== -->
+        <section id="tab-10" class="tab-pane" data-title="Principios y Máximas">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Síntesis Filosófica</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">10. Principios y máximas</h2>
+                <p class="text-slate-300 mt-2 text-[15px] sm:text-base">
+                    Estas frases resumen el enfoque desarrollado en este documento:
+                </p>
+            </div>
+
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-3 mb-6">
+                <ol class="space-y-3 text-slate-200 text-[15px] sm:text-base">
+                    <li class="flex items-start gap-3"><span class="text-amber-400 font-bold">1.</span><span>El tiempo no es solamente algo que transcurre: puede ser capital estratégico.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-amber-400 font-bold">2.</span><span>Una prórroga no es una solución; es el espacio para construirla.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-amber-400 font-bold">3.</span><span>Los recursos determinan cuánto puedes hacer; el tiempo condiciona hasta cuándo puedes hacerlo.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-amber-400 font-bold">4.</span><span>Un recurso disponible fuera de plazo puede perder su valor para un objetivo concreto.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-amber-400 font-bold">5.</span><span>No basta con tener tiempo: hay que conservar la capacidad de actuar.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-amber-400 font-bold">6.</span><span>La colaboración puede generar buena voluntad, y la buena voluntad puede facilitar flexibilidad.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-amber-400 font-bold">7.</span><span>El tiempo concedido debe convertirse en información, recursos, alternativas y resultados.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-amber-400 font-bold">8.</span><span>No siempre hay que ganar hoy; a veces lo esencial es conservar la capacidad de actuar mañana.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-amber-400 font-bold">9.</span><span>La mejor prórroga es aquella que deja de ser necesaria.</span></li>
+                    <li class="flex items-start gap-3"><span class="text-amber-400 font-bold">10.</span><span>No se trata de esperar el desenlace, sino de utilizar el margen disponible para influir en él.</span></li>
+                </ol>
+            </div>
+
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4">
+                <h3 class="font-display font-bold text-xl text-amber-400">Principio de la ventana temporal</h3>
+                <blockquote class="quote-box p-4 sm:p-5 rounded-r-xl">
+                    <p class="text-white font-display font-bold text-base sm:text-lg leading-snug">
+                        “El objetivo no es simplemente ganar tiempo. El objetivo es crear, proteger y ampliar el intervalo durante el cual todavía podemos actuar para alcanzar nuestro propósito.”
+                    </p>
+                </blockquote>
+
+                <h4 class="font-display font-bold text-lg text-emerald-400 pt-2">Corolario</h4>
+                <blockquote class="p-4 sm:p-5 rounded-r-xl bg-emerald-500/10 border-l-4 border-emerald-500">
+                    <p class="text-emerald-200 font-display font-bold text-base sm:text-lg leading-snug">
+                        “Nunca desperdicies una ventana temporal esperando que las circunstancias mejoren. Utilízala para construir las condiciones que necesitas.”
+                    </p>
+                </blockquote>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 11: 33 PREGUNTAS Y RESPUESTAS
+             ========================================== -->
+        <section id="tab-11" class="tab-pane" data-title="33 Preguntas Clave">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Dominio Conceptual y Práctico</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">11. 33 preguntas y respuestas, ordenadas por nivel de dificultad</h2>
+                <p class="text-slate-300 mt-2 text-[15px] sm:text-base">
+                    Las preguntas avanzan desde la comprensión básica del concepto hasta su aplicación estratégica y el análisis de situaciones complejas.
+                </p>
+            </div>
+
+            <!-- Botones obligatorios de desplegar/plegar todas las respuestas -->
+            <div class="sticky top-[104px] z-30 bg-dark-950/95 backdrop-blur-md py-3 px-3 mb-6 rounded-2xl border border-slate-800 shadow-lg flex flex-col sm:flex-row gap-2.5">
+                <button onclick="toggleAllFaq(true)"
+                    class="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-display font-extrabold text-xs sm:text-sm tracking-wide shadow-md active:scale-95 transition-transform flex items-center justify-center gap-2">
+                    <span>+ Desplegar todas las respuestas</span>
+                </button>
+                <button onclick="toggleAllFaq(false)"
+                    class="flex-1 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 font-display font-extrabold text-xs sm:text-sm tracking-wide shadow-md active:scale-95 transition-transform flex items-center justify-center gap-2">
+                    <span>- Plegar todas las respuestas</span>
+                </button>
+            </div>
+
+            <!-- Contenedor de los 6 niveles de preguntas -->
+            <div id="faq-master-list" class="space-y-7">
+                <!-- Inyectado íntegramente por JS para limpieza y precisión del DOM -->
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 12: PLANTILLA Y CONCLUSIÓN
+             ========================================== -->
+        <section id="tab-12" class="tab-pane" data-title="Plantilla y Conclusión">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Herramienta de Campo</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">12. Plantilla breve para analizar una ventana temporal</h2>
+                <p class="text-slate-300 mt-2 text-[15px] sm:text-base">
+                    Esta plantilla puede utilizarse en cualquier situación que tenga una fecha límite.
+                </p>
+            </div>
+
+            <!-- Tabla interactiva rellenable por el usuario -->
+            <div class="agency-card rounded-2xl overflow-hidden mb-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-900/95 border-b border-slate-800 text-amber-400 text-xs uppercase tracking-wider">
+                                <th class="p-3.5 sm:p-4 font-bold w-1/2">Pregunta</th>
+                                <th class="p-3.5 sm:p-4 font-bold w-1/2">Respuesta</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/80 text-sm sm:text-[15px]">
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Cuál es el objetivo concreto?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Cuál es la fecha límite formal?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Existe un cierre anticipado posible?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Cuánto tiempo útil queda?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Qué tareas son imprescindibles?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Qué tareas dependen de terceros?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Qué puede cerrar la ventana?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Se puede negociar una ampliación?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Qué necesita la otra parte?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Qué puedo ofrecer de manera realista?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Qué resultado produciré esta semana?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Cuál es mi alternativa si falla la primera opción?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3.5 font-medium text-white">¿Qué debo haber conseguido antes del cierre?</td>
+                                <td class="p-2.5"><input type="text" placeholder="Escribe tu respuesta aquí..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-lg px-3 py-2 text-slate-200 text-xs sm:text-sm focus:outline-none focus:border-amber-500"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Revisión periódica -->
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4 mb-6">
+                <h3 class="font-display font-bold text-xl text-amber-400">Revisión periódica</h3>
+                <p class="text-slate-300 text-[15px] sm:text-base">
+                    Al revisar la estrategia, conviene responder:
+                </p>
+                <ul class="space-y-2 text-slate-300 text-[15px] sm:text-base pl-1">
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>¿La ventana sigue abierta?</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>¿Las condiciones han mejorado o empeorado?</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>¿Cuánto tiempo útil queda?</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>¿Qué avance verificable he conseguido?</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>¿Qué obstáculo amenaza el objetivo?</span></li>
+                    <li class="flex items-start gap-2.5"><span class="text-amber-400 font-bold">•</span><span>¿Necesito negociar, cambiar de camino o acelerar una tarea?</span></li>
+                </ul>
+            </div>
+
+            <!-- Conclusión -->
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4 border-t-4 border-t-amber-500">
+                <h3 class="font-display font-extrabold text-2xl text-white">Conclusión</h3>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    La idea que atraviesa todo este documento es sencilla, pero tiene consecuencias importantes:
+                </p>
+                <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30">
+                    <p class="text-white font-bold text-[15px] sm:text-base">
+                        El tiempo no debe tratarse únicamente como una cuenta atrás. Puede tratarse como un capital que permite construir capacidad de acción.
+                    </p>
+                </div>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Una prórroga puede proporcionar oxígeno. La colaboración puede facilitarla. La información puede ayudar a elegir mejor. La planificación puede convertir los días disponibles en avances. Y las alternativas pueden impedir que una sola oportunidad determine todo el resultado.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    Pero el tiempo por sí solo no garantiza el control. Lo que proporciona es margen de maniobra: la posibilidad de actuar, negociar, corregir y elegir.
+                </p>
+                <p class="text-slate-300 leading-relaxed text-[15px] sm:text-base">
+                    La estrategia consiste en utilizar ese margen antes de que desaparezca.
+                </p>
+                <blockquote class="quote-box p-4 sm:p-5 rounded-r-xl">
+                    <p class="text-amber-300 font-display font-bold text-base sm:text-lg leading-snug">
+                        “No se trata de esperar que el tiempo resuelva el problema. Se trata de utilizar el tiempo para construir la solución.”
+                    </p>
+                </blockquote>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+        <!-- ==========================================
+             PESTAÑA 13: CRÉDITOS
+             ========================================== -->
+        <section id="tab-13" class="tab-pane" data-title="CRÉDITOS">
+            <div class="mb-5">
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Ficha Oficial de Autoría</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">CRÉDITOS</h2>
+            </div>
+
+            <!-- Tarjeta Principal Destacada con Formato Exacto Solicitado -->
+            <div class="relative rounded-2xl overflow-hidden p-6 sm:p-8 mb-6 bg-gradient-to-br from-amber-500/25 via-dark-800 to-dark-950 border-2 border-amber-500/50 shadow-2xl text-center space-y-4">
+                <div class="w-16 h-16 rounded-2xl bg-amber-500 text-slate-950 font-display font-extrabold text-2xl flex items-center justify-center mx-auto shadow-lg">
+                    RS
+                </div>
+                <p class="font-display font-extrabold text-lg sm:text-2xl text-white tracking-tight">
+                    CRÉDITOS: Rubén Sbarsky, Fecha 📆: 17/11/2026, Hora 🕰: 20:25:51
+                </p>
+                <div class="inline-block px-4 py-1.5 rounded-full bg-slate-900/90 border border-amber-500/30 text-amber-300 text-xs font-semibold">
+                    Edición Digital Interactiva Premium
+                </div>
+            </div>
+
+            <!-- Metadatos Completos del Documento Adjunto -->
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4 mb-6">
+                <h3 class="font-display font-bold text-lg text-amber-400 border-b border-slate-800 pb-2.5">
+                    Registro Íntegro del Documento
+                </h3>
+                <ul class="space-y-3 text-slate-300 text-[15px] sm:text-base">
+                    <li class="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800/80">
+                        <strong class="text-white">Autor:</strong>
+                        <span class="text-amber-400 font-semibold">Rubén Sbarsky</span>
+                    </li>
+                    <li class="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800/80">
+                        <strong class="text-white">Título:</strong>
+                        <span class="text-slate-200">El tiempo como capital estratégico — La ventana temporal</span>
+                    </li>
+                    <li class="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800/80">
+                        <strong class="text-white">Fecha 📆:</strong>
+                        <span class="text-slate-200 font-mono">17/11/2026</span>
+                    </li>
+                    <li class="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800/80">
+                        <strong class="text-white">Hora 🕰:</strong>
+                        <span class="text-slate-200 font-mono">20:25:51 (Registro original: 20:01 hora peninsular española)</span>
+                    </li>
+                    <li class="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800/80">
+                        <strong class="text-white">Idioma:</strong>
+                        <span class="text-slate-200">Español</span>
+                    </li>
+                    <li class="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-slate-800/80">
+                        <strong class="text-white">Tipo de documento:</strong>
+                        <span class="text-slate-200">Ensayo práctico y guía de pensamiento estratégico</span>
+                    </li>
+                    <li class="flex flex-col p-3 rounded-xl bg-slate-900/80 border border-slate-800/80 gap-1">
+                        <strong class="text-white">Enfoque:</strong>
+                        <span class="text-slate-300 text-sm">Tiempo, negociación, colaboración, planificación, ventanas de oportunidad y capacidad de maniobra.</span>
+                    </li>
+                </ul>
+
+                <div class="pt-3 text-center">
+                    <p class="font-display font-extrabold text-amber-400 uppercase tracking-widest text-sm">
+                        Fin del documento.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Enlaces URL de Referencia Histórica con Botón Obligatorio "Abrir en otra Ventana" -->
+            <div class="agency-card rounded-2xl p-5 sm:p-7 space-y-4">
+                <h3 class="font-display font-bold text-base text-slate-200">
+                    Referencias Documentales y Enlaces Externos
+                </h3>
+                <div class="space-y-3">
+                    <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div>
+                            <a href="https://es.wikipedia.org/wiki/Quinto_Fabio_M%C3%A1ximo" target="_blank" rel="noopener noreferrer" class="text-amber-400 font-semibold text-sm hover:underline block">
+                                Quinto Fabio Máximo y la Estrategia Fabiana (Wikipedia)
+                            </a>
+                            <span class="text-xs text-slate-400 font-mono break-all">https://es.wikipedia.org/wiki/Quinto_Fabio_M%C3%A1ximo</span>
+                        </div>
+                        <button onclick="window.open('https://es.wikipedia.org/wiki/Quinto_Fabio_M%C3%A1ximo', '_blank', 'noopener,noreferrer')"
+                            class="shrink-0 px-3.5 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-bold text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-95">
+                            <span>Abrir en otra Ventana</span>
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </button>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div>
+                            <a href="https://es.wikipedia.org/wiki/Segunda_guerra_p%C3%BAnica" target="_blank" rel="noopener noreferrer" class="text-amber-400 font-semibold text-sm hover:underline block">
+                                Contexto Histórico: Segunda Guerra Púnica (Wikipedia)
+                            </a>
+                            <span class="text-xs text-slate-400 font-mono break-all">https://es.wikipedia.org/wiki/Segunda_guerra_p%C3%BAnica</span>
+                        </div>
+                        <button onclick="window.open('https://es.wikipedia.org/wiki/Segunda_guerra_p%C3%BAnica', '_blank', 'noopener,noreferrer')"
+                            class="shrink-0 px-3.5 py-2 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-display font-bold text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-95">
+                            <span>Abrir en otra Ventana</span>
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-footer-slot mt-8"></div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================
+         BOTONES FLOTANTES MOVIBLES (TOUCH & MOUSE DRAGGABLE)
+         ========================================== -->
+    <!-- Botón Flotante Movible: INICIO -->
+    <button id="float-btn-inicio" title="Arrastrar o tocar para ir a INICIO"
+        class="floating-draggable fixed z-40 right-3 bottom-24 px-3.5 py-2.5 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-display font-extrabold text-xs tracking-wider uppercase shadow-2xl border-2 border-amber-300 flex items-center gap-1.5">
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        <span>INICIO</span>
+    </button>
+
+    <!-- Botón Flotante Movible: ARRIBA -->
+    <button id="float-btn-arriba" title="Arrastrar o tocar para subir al comienzo de la pestaña actual"
+        class="floating-draggable fixed z-40 right-3 bottom-10 px-3.5 py-2.5 rounded-2xl bg-slate-900/95 text-amber-400 font-display font-extrabold text-xs tracking-wider uppercase shadow-2xl border-2 border-amber-500/60 flex items-center gap-1.5">
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+        <span>ARRIBA</span>
+    </button>
+
+    <!-- ==========================================
+         LÓGICA JAVASCRIPT COMPLETA
+         ========================================== -->
+    <script>
+        // Definición de las 14 pestañas con nombres estrechamente relacionados con el contenido (sin "Cap. 01" ni "Módulo 01")
+        const TABS_CONFIG = [
+            { id: 0, title: "Inicio y Propósito" },
+            { id: 1, title: "Activo Estratégico" },
+            { id: 2, title: "Ventana Temporal" },
+            { id: 3, title: "Cinco Operaciones" },
+            { id: 4, title: "Colaboración y Margen" },
+            { id: 5, title: "Estrategia Militar" },
+            { id: 6, title: "Formas de Agotamiento" },
+            { id: 7, title: "Tipos de Ventanas" },
+            { id: 8, title: "Método Práctico" },
+            { id: 9, title: "Errores Frecuentes" },
+            { id: 10, title: "Principios y Máximas" },
+            { id: 11, title: "33 Preguntas Clave" },
+            { id: 12, title: "Plantilla y Conclusión" },
+            { id: 13, title: "CRÉDITOS" }
+        ];
+
+        // Base de datos íntegra de las 33 Preguntas y Respuestas divididas por sus 6 niveles originales
+        const FAQ_DATA = [
+            {
+                level: "Nivel 1 — Comprensión básica",
+                items: [
+                    {
+                        q: "1. ¿Qué significa considerar el tiempo un activo estratégico?",
+                        a: "Significa reconocer que el tiempo disponible puede utilizarse para producir valor: conseguir información, reunir recursos, negociar, preparar alternativas y ejecutar acciones. No es un activo que se almacene como el dinero; es un recurso limitado que debe utilizarse antes de que transcurra."
+                    },
+                    {
+                        q: "2. ¿Qué es una ventana temporal?",
+                        a: "Es el período durante el cual existen condiciones suficientes para realizar una acción o alcanzar un objetivo. Tiene una apertura, una duración y un cierre, aunque el cierre puede adelantarse si cambian las circunstancias."
+                    },
+                    {
+                        q: "3. ¿Por qué una prórroga puede ser tan valiosa?",
+                        a: "Porque evita que una oportunidad se cierre de inmediato y permite realizar acciones que necesitan tiempo. Su valor depende de lo que se haga con ella y de que realmente permita modificar el resultado."
+                    },
+                    {
+                        q: "4. ¿Por qué tener dinero no siempre resuelve un problema?",
+                        a: "Porque puede existir un plazo vencido, una autorización que ya no está vigente o una oportunidad que desapareció. Los recursos deben estar disponibles y ser utilizables en el momento adecuado."
+                    },
+                    {
+                        q: "5. ¿Qué diferencia hay entre tiempo restante y tiempo útil?",
+                        a: "El tiempo restante es el que marca el calendario. El tiempo útil es el que todavía puede emplearse para completar las acciones necesarias, considerando demoras, dependencias y condiciones reales."
+                    }
+                ]
+            },
+            {
+                level: "Nivel 2 — Aplicación cotidiana",
+                items: [
+                    {
+                        q: "6. ¿Cómo puedo aprovechar mejor un plazo de treinta días?",
+                        a: "Definiendo un objetivo concreto, identificando las tareas necesarias, ordenándolas por prioridad, fijando hitos y revisando los avances. Cada período debería producir un resultado verificable."
+                    },
+                    {
+                        q: "7. ¿Qué significa proteger una ventana temporal?",
+                        a: "Evitar que se cierre antes de tiempo por errores, falta de comunicación, incumplimientos evitables o decisiones precipitadas. También significa verificar las condiciones y conservar alternativas."
+                    },
+                    {
+                        q: "8. ¿Cómo se puede ampliar una ventana temporal?",
+                        a: "Mediante una negociación, una prórroga, un acuerdo por etapas o una solución provisional. La posibilidad depende de quién controla el plazo y de las reglas aplicables."
+                    },
+                    {
+                        q: "9. ¿Por qué conviene negociar antes de que venza el plazo?",
+                        a: "Porque antes del vencimiento suele haber más opciones para organizar una solución. Cuando el plazo ya venció, pueden haberse producido consecuencias difíciles o imposibles de revertir."
+                    },
+                    {
+                        q: "10. ¿Qué debería contener una petición de más tiempo?",
+                        a: "Una explicación honesta de la situación, el reconocimiento de los compromisos, un plan concreto para utilizar el tiempo adicional y una fecha o hito verificable."
+                    }
+                ]
+            },
+            {
+                level: "Nivel 3 — Negociación y colaboración",
+                items: [
+                    {
+                        q: "11. ¿Por qué colaborar puede hacer que la otra parte sea más flexible?",
+                        a: "Porque la cooperación puede generar confianza y mostrar que existe interés en resolver el problema, no solamente en obtener una concesión. La otra parte puede percibir que facilitar el proceso también le beneficia."
+                    },
+                    {
+                        q: "12. ¿Qué es la reciprocidad en una negociación?",
+                        a: "Es la tendencia a corresponder a una conducta cooperativa o a un beneficio recibido. Puede favorecer acuerdos, aunque no garantiza que la otra parte conceda lo que se solicita."
+                    },
+                    {
+                        q: "13. ¿Cómo puedo alinear mis intereses con los de la otra parte?",
+                        a: "Identificando qué necesita cada uno, qué puntos tienen en común y qué intercambio realista puede beneficiar a ambos. La clave es construir una solución compartida, no fingir coincidencias."
+                    },
+                    {
+                        q: "14. ¿La colaboración significa renunciar a mis propios objetivos?",
+                        a: "No. Significa buscar una forma de avanzar hacia ellos sin ignorar las necesidades legítimas de la otra parte. Colaborar no exige aceptar cualquier condición ni abandonar límites razonables."
+                    },
+                    {
+                        q: "15. ¿Qué diferencia hay entre colaboración estratégica y manipulación?",
+                        a: "La colaboración estratégica crea beneficios reales y se apoya en información honesta y compromisos cumplibles. La manipulación busca obtener una ventaja ocultando intenciones o creando una impresión engañosa. Puede dañar la confianza y cerrar oportunidades futuras."
+                    }
+                ]
+            },
+            {
+                level: "Nivel 4 — Planificación estratégica",
+                items: [
+                    {
+                        q: "16. ¿Cómo se identifica una fecha de cierre real?",
+                        a: "Hay que distinguir entre la fecha formal, las consecuencias jurídicas o contractuales, los tiempos operativos y los posibles cierres anticipados. Conviene verificar las condiciones con la fuente competente y no confiar en suposiciones."
+                    },
+                    {
+                        q: "17. ¿Qué es una dependencia temporal?",
+                        a: "Es una relación en la que una tarea necesita que otra haya terminado antes de poder comenzar. Si se retrasa una tarea inicial, puede retrasarse toda la secuencia."
+                    },
+                    {
+                        q: "18. ¿Por qué es importante reservar un margen de seguridad?",
+                        a: "Porque los trámites, entregas, respuestas y decisiones pueden demorarse. El margen absorbe imprevistos y reduce el riesgo de que una pequeña demora haga fracasar el objetivo."
+                    },
+                    {
+                        q: "19. ¿Qué significa convertir tiempo en capacidad?",
+                        a: "Significa terminar el período con más recursos útiles que al principio: información, contactos, documentación, acuerdos, conocimientos, dinero, opciones o preparación."
+                    },
+                    {
+                        q: "20. ¿Cómo se evita depender de una sola oportunidad?",
+                        a: "Preparando alternativas desde el principio, comparando sus requisitos y manteniendo activas varias vías cuando sea viable. Una alternativa no tiene que ser idéntica a la primera; debe permitir alcanzar el objetivo esencial."
+                    }
+                ]
+            },
+            {
+                level: "Nivel 5 — Análisis avanzado",
+                items: [
+                    {
+                        q: "21. ¿Puede una ventana seguir abierta y, aun así, estar deteriorándose?",
+                        a: "Sí. Puede quedar tiempo en el calendario mientras empeoran las condiciones: disminuye la confianza, aumenta el coste, se reducen las opciones o se acerca una fecha crítica. Por eso hay que evaluar tanto la duración como la calidad de la oportunidad."
+                    },
+                    {
+                        q: "22. ¿Qué diferencia hay entre crear una ventana y aprovecharla?",
+                        a: "Crear una ventana consiste en conseguir un período de oportunidad. Aprovecharla consiste en utilizar ese período para realizar acciones que acerquen al objetivo. Una ventana creada pero desperdiciada no produce una ventaja."
+                    },
+                    {
+                        q: "23. ¿Qué significa transformar una ventana externa en una negociable?",
+                        a: "Significa buscar alternativas que permitan influir indirectamente en una circunstancia que no controlamos. Por ejemplo, quizá no se pueda cambiar la fecha de una convocatoria, pero sí negociar con un tercero una solución alternativa. No siempre es posible modificar la ventana original."
+                    },
+                    {
+                        q: "24. ¿Por qué una estrategia debe incluir el momento de abandonar una opción?",
+                        a: "Porque continuar invirtiendo tiempo y recursos en una alternativa inviable puede consumir el margen necesario para otras. Definir criterios de salida permite cambiar de camino antes de que sea demasiado tarde."
+                    },
+                    {
+                        q: "25. ¿Puede ser estratégico no actuar inmediatamente?",
+                        a: "Sí, si esperar permite obtener información relevante, evitar una decisión prematura o elegir un momento más favorable. Pero esperar solo es útil cuando tiene un propósito y no pone en peligro el plazo."
+                    }
+                ]
+            },
+            {
+                level: "Nivel 6 — Pensamiento estratégico y situaciones complejas",
+                items: [
+                    {
+                        q: "26. ¿Puede perderse una oportunidad aunque todavía existan recursos suficientes?",
+                        a: "Sí. Los recursos pueden seguir disponibles, pero el plazo, la autorización, la oferta o las condiciones necesarias pueden haber desaparecido. La capacidad material no garantiza que la oportunidad siga abierta."
+                    },
+                    {
+                        q: "27. ¿Por qué el tiempo puede ser decisivo en una guerra?",
+                        a: "Porque las operaciones dependen de ventanas de oportunidad, logística, coordinación, apoyo político, resistencia económica y capacidad humana. Un ejército puede conservar recursos y, sin embargo, perder la posibilidad de alcanzar su objetivo. No es una explicación única de todas las derrotas, sino un factor estratégico importante."
+                    },
+                    {
+                        q: "28. ¿Qué enseña la estrategia fabiana sobre el tiempo?",
+                        a: "La estrategia asociada a Fabio Máximo muestra que evitar una confrontación desfavorable puede preservar fuerzas y permitir desgastar al adversario. La enseñanza es que conservar capacidad de acción puede ser más importante que buscar una decisión inmediata."
+                    },
+                    {
+                        q: "29. ¿Por qué una retirada puede conservar una posibilidad de victoria?",
+                        a: "Porque puede evitar una pérdida mayor y preservar recursos para reorganizarse. Su valor depende de que exista una alternativa viable y de que la retirada no destruya la capacidad futura de actuar."
+                    },
+                    {
+                        q: "30. ¿Cómo se relacionan tiempo, información y poder de negociación?",
+                        a: "La información permite evaluar opciones y anticipar consecuencias. El tiempo permite buscarla y utilizarla. Con más información y margen temporal, una parte puede negociar sin verse obligada a aceptar precipitadamente la primera salida disponible."
+                    },
+                    {
+                        q: "31. ¿Tener tiempo significa estar en control?",
+                        a: "No necesariamente. Significa conservar capacidad de maniobra. El control depende también de los recursos, las reglas, las decisiones de terceros y los acontecimientos externos. Tener tiempo suele mejorar las opciones, pero no garantiza el resultado."
+                    },
+                    {
+                        q: "32. ¿Cuál es el mayor error al conseguir una prórroga?",
+                        a: "Confundir el tiempo adicional con una solución y utilizarlo para aplazar las decisiones. Una prórroga solo tiene valor estratégico si se convierte en avances concretos y verificables."
+                    },
+                    {
+                        q: "33. ¿Cuál es la idea central de toda esta teoría?",
+                        a: "Que el objetivo no es simplemente disponer de más tiempo, sino mantener abierta la posibilidad de actuar hasta haber construido una solución. El tiempo es capital estratégico cuando se invierte en capacidades, recursos y alternativas."
+                    }
+                ]
+            }
+        ];
+
+        let currentTabIndex = 0;
+
+        // Inicializar interfaz
+        function initApp() {
+            renderNavigationBars();
+            renderFootersInTabs();
+            renderFaqSection();
+            setupDraggableFloatingButton('float-btn-inicio', () => selectTab(0));
+            setupDraggableFloatingButton('float-btn-arriba', () => scrollCurrentTabToTop());
+            selectTab(0);
+        }
+
+        // Renderizar barra superior de pestañas y lista vertical del menú sándwich
+        function renderNavigationBars() {
+            const topBar = document.getElementById('top-tabs-bar');
+            const drawerList = document.getElementById('drawer-links-list');
+
+            topBar.innerHTML = '';
+            drawerList.innerHTML = '';
+
+            TABS_CONFIG.forEach((tab, idx) => {
+                // Botón en barra horizontal superior
+                const btn = document.createElement('button');
+                btn.id = `top-tab-btn-${idx}`;
+                btn.className = `top-tab-btn shrink-0 px-3.5 py-2 rounded-xl text-xs font-display font-semibold border border-slate-800 bg-slate-900/90 text-slate-300 hover:text-white transition-all whitespace-nowrap`;
+                btn.textContent = tab.title;
+                btn.onclick = () => selectTab(idx);
+                topBar.appendChild(btn);
+
+                // Botón en menú sándwich vertical
+                const dBtn = document.createElement('button');
+                dBtn.id = `drawer-btn-${idx}`;
+                dBtn.className = `w-full text-left px-3.5 py-3 rounded-xl flex items-center justify-between gap-2 text-sm font-medium transition-all border border-transparent`;
+                dBtn.innerHTML = `
+                    <span class="truncate">${tab.title}</span>
+                    <svg class="w-4 h-4 shrink-0 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                `;
+                dBtn.onclick = () => {
+                    selectTab(idx);
+                    toggleDrawer(false);
+                };
+                drawerList.appendChild(dBtn);
+            });
+        }
+
+        // Renderizar pie de navegación fijo al final de cada pestaña (Anterior / Próxima)
+        function renderFootersInTabs() {
+            TABS_CONFIG.forEach((tab, idx) => {
+                const pane = document.getElementById(`tab-${idx}`);
+                if (!pane) return;
+                const slot = pane.querySelector('.nav-footer-slot');
+                if (!slot) return;
+
+                const prevTab = idx > 0 ? TABS_CONFIG[idx - 1] : null;
+                const nextTab = idx < TABS_CONFIG.length - 1 ? TABS_CONFIG[idx + 1] : null;
+
+                let html = `<div class="pt-6 border-t border-slate-800/90 grid grid-cols-1 sm:grid-cols-2 gap-3">`;
+
+                if (prevTab) {
+                    html += `
+                        <button onclick="selectTab(${idx - 1})"
+                            class="w-full p-4 rounded-2xl bg-slate-900 hover:bg-slate-800 border border-slate-700/80 text-left transition-all active:scale-98 flex items-center gap-3 group">
+                            <div class="w-9 h-9 rounded-xl bg-slate-800 group-hover:bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 19l-7-7 7-7"/></svg>
+                            </div>
+                            <div class="overflow-hidden">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Pestaña Anterior</span>
+                                <span class="font-display font-bold text-sm text-white truncate block">${prevTab.title}</span>
+                            </div>
+                        </button>
+                    `;
+                } else {
+                    html += `<div class="hidden sm:block"></div>`;
+                }
+
+                if (nextTab) {
+                    html += `
+                        <button onclick="selectTab(${idx + 1})"
+                            class="w-full p-4 rounded-2xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-right transition-all active:scale-98 flex items-center justify-between gap-3 shadow-lg shadow-amber-500/15">
+                            <div class="overflow-hidden text-left">
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-900/80 block">Próxima Pestaña</span>
+                                <span class="font-display font-extrabold text-sm text-slate-950 truncate block">${nextTab.title}</span>
+                            </div>
+                            <div class="w-9 h-9 rounded-xl bg-slate-950/15 text-slate-950 flex items-center justify-center shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+                            </div>
+                        </button>
+                    `;
+                }
+
+                html += `</div>`;
+                slot.innerHTML = html;
+            });
+        }
+
+        // Renderizar las 33 preguntas y respuestas
+        function renderFaqSection() {
+            const container = document.getElementById('faq-master-list');
+            if (!container) return;
+
+            let html = '';
+            FAQ_DATA.forEach((group) => {
+                html += `
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-2.5 px-1">
+                            <span class="w-2 h-5 rounded-full bg-amber-500"></span>
+                            <h3 class="font-display font-extrabold text-lg sm:text-xl text-amber-400">${group.level}</h3>
+                        </div>
+                        <div class="space-y-2.5">
+                `;
+
+                group.items.forEach((item) => {
+                    html += `
+                        <div class="faq-item agency-card rounded-2xl overflow-hidden transition-all">
+                            <button type="button" onclick="toggleSingleFaq(this)"
+                                class="w-full p-4 sm:p-5 text-left flex items-start justify-between gap-3 hover:bg-slate-900/50 transition-colors">
+                                <span class="font-display font-bold text-white text-[15px] sm:text-base leading-snug">${item.q}</span>
+                                <span class="faq-icon w-6 h-6 rounded-lg bg-amber-500/15 border border-amber-500/40 text-amber-400 flex items-center justify-center shrink-0 mt-0.5 font-bold text-sm transition-transform duration-200">+</span>
+                            </button>
+                            <div class="faq-answer hidden px-4 sm:px-5 pb-4 sm:pb-5 pt-1 text-slate-300 text-sm sm:text-[15px] leading-relaxed border-t border-slate-800/60 bg-slate-950/40">
+                                ${item.a}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div></div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Alternar una respuesta individual
+        function toggleSingleFaq(btn) {
+            const card = btn.closest('.faq-item');
+            const answer = card.querySelector('.faq-answer');
+            const icon = card.querySelector('.faq-icon');
+            const isHidden = answer.classList.contains('hidden');
+
+            if (isHidden) {
+                answer.classList.remove('hidden');
+                icon.textContent = '−';
+                icon.classList.add('bg-amber-500', 'text-slate-950');
+            } else {
+                answer.classList.add('hidden');
+                icon.textContent = '+';
+                icon.classList.remove('bg-amber-500', 'text-slate-950');
+            }
+        }
+
+        // Desplegar o plegar TODAS las 33 respuestas simultáneamente
+        function toggleAllFaq(expand) {
+            const items = document.querySelectorAll('#faq-master-list .faq-item');
+            items.forEach((card) => {
+                const answer = card.querySelector('.faq-answer');
+                const icon = card.querySelector('.faq-icon');
+                if (expand) {
+                    answer.classList.remove('hidden');
+                    icon.textContent = '−';
+                    icon.classList.add('bg-amber-500', 'text-slate-950');
+                } else {
+                    answer.classList.add('hidden');
+                    icon.textContent = '+';
+                    icon.classList.remove('bg-amber-500', 'text-slate-950');
+                }
+            });
+        }
+
+        // Cambiar de pestaña con auto-centrado horizontal y scroll al comienzo
+        function selectTab(index) {
+            if (index < 0 || index >= TABS_CONFIG.length) return;
+            currentTabIndex = index;
+
+            // Mostrar pestaña activa
+            document.querySelectorAll('.tab-pane').forEach((pane, idx) => {
+                if (idx === index) {
+                    pane.classList.add('active');
+                } else {
+                    pane.classList.remove('active');
+                }
+            });
+
+            // Actualizar estado visual en barra superior y auto-centrar pestaña activa
+            TABS_CONFIG.forEach((_, idx) => {
+                const topBtn = document.getElementById(`top-tab-btn-${idx}`);
+                const drawerBtn = document.getElementById(`drawer-btn-${idx}`);
+
+                if (idx === index) {
+                    topBtn.classList.add('active');
+                    topBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+
+                    drawerBtn.className = 'w-full text-left px-3.5 py-3 rounded-xl flex items-center justify-between gap-2 text-sm font-bold bg-amber-500 text-slate-950 shadow-md';
+                } else {
+                    topBtn.classList.remove('active');
+                    drawerBtn.className = 'w-full text-left px-3.5 py-3 rounded-xl flex items-center justify-between gap-2 text-sm font-medium text-slate-300 hover:bg-slate-800/70 hover:text-white';
+                }
+            });
+
+            // Actualizar subtítulo e indicador en cabecera
+            document.getElementById('header-active-title').textContent = TABS_CONFIG[index].title;
+            document.getElementById('tab-counter-badge').textContent = `${index + 1}/${TABS_CONFIG.length}`;
+
+            // Subir al inicio de la pestaña recién abierta
+            scrollCurrentTabToTop();
+        }
+
+        // Subir siempre al comienzo de la pestaña actual
+        function scrollCurrentTabToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.documentElement.scrollTop = 0;
+            document.body.scrollTop = 0;
+        }
+
+        // Abrir / cerrar menú sándwich (ÍNDICE vertical)
+        function toggleDrawer(open) {
+            const backdrop = document.getElementById('drawer-backdrop');
+            const panel = document.getElementById('drawer-panel');
+
+            if (open) {
+                backdrop.classList.remove('hidden');
+                requestAnimationFrame(() => {
+                    backdrop.classList.remove('opacity-0');
+                    panel.classList.remove('-translate-x-full');
+                });
+            } else {
+                backdrop.classList.add('opacity-0');
+                panel.classList.add('-translate-x-full');
+                setTimeout(() => {
+                    backdrop.classList.add('hidden');
+                }, 250);
+            }
+        }
+
+        // Sistema de arrastre táctil y de ratón para los botones flotantes (INICIO y ARRIBA)
+        function setupDraggableFloatingButton(elementId, onClickAction) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+
+            let isDragging = false;
+            let hasMoved = false;
+            let startX = 0, startY = 0;
+            let initialLeft = 0, initialTop = 0;
+
+            const startDrag = (clientX, clientY) => {
+                isDragging = true;
+                hasMoved = false;
+                const rect = el.getBoundingClientRect();
+                startX = clientX;
+                startY = clientY;
+                initialLeft = rect.left;
+                initialTop = rect.top;
+
+                el.style.right = 'auto';
+                el.style.bottom = 'auto';
+                el.style.left = `${initialLeft}px`;
+                el.style.top = `${initialTop}px`;
+            };
+
+            const onMove = (clientX, clientY) => {
+                if (!isDragging) return;
+                const dx = clientX - startX;
+                const dy = clientY - startY;
+
+                if (Math.abs(dx) > 6 || Math.abs(dy) > 6) {
+                    hasMoved = true;
+                }
+
+                const maxLeft = window.innerWidth - el.offsetWidth - 6;
+                const maxTop = window.innerHeight - el.offsetHeight - 6;
+
+                const newLeft = Math.max(6, Math.min(maxLeft, initialLeft + dx));
+                const newTop = Math.max(6, Math.min(maxTop, initialTop + dy));
+
+                el.style.left = `${newLeft}px`;
+                el.style.top = `${newTop}px`;
+            };
+
+            const endDrag = () => {
+                if (!isDragging) return;
+                isDragging = false;
+                if (!hasMoved && typeof onClickAction === 'function') {
+                    onClickAction();
+                }
+            };
+
+            // Eventos Táctiles (Samsung Galaxy A02s)
+            el.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    startDrag(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchmove', (e) => {
+                if (isDragging && e.touches.length === 1) {
+                    e.preventDefault();
+                    onMove(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: false });
+
+            window.addEventListener('touchend', () => {
+                endDrag();
+            });
+
+            // Eventos de Ratón (Escritorio)
+            el.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                startDrag(e.clientX, e.clientY);
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    onMove(e.clientX, e.clientY);
+                }
+            });
+
+            window.addEventListener('mouseup', () => {
+                endDrag();
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
